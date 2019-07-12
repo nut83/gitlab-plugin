@@ -30,7 +30,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.EnumSet;
 import java.util.concurrent.ExecutionException;
 
 import static com.dabsquared.gitlabjenkins.gitlab.hook.model.builder.generated.CommitBuilder.commit;
@@ -133,7 +132,7 @@ public class MergeRequestHookTriggerHandlerImplTest {
         MergeRequestHookTriggerHandler mergeRequestHookTriggerHandler = withConfig()
             .setTriggerOnClosedMergeRequest(true)
             .build();
-        OneShotEvent buildTriggered = doHandle(mergeRequestHookTriggerHandler, State.closed, Action.closed);
+        OneShotEvent buildTriggered = doHandle(mergeRequestHookTriggerHandler, State.closed, Action.close);
 
         assertThat(buildTriggered.isSignaled(), is(true));
     }
@@ -144,7 +143,7 @@ public class MergeRequestHookTriggerHandlerImplTest {
             .setTriggerOnClosedMergeRequest(true)
             .setTriggerOnApprovedMergeRequest(true)
             .build();
-        OneShotEvent buildTriggered = doHandle(mergeRequestHookTriggerHandler, State.closed, Action.closed);
+        OneShotEvent buildTriggered = doHandle(mergeRequestHookTriggerHandler, State.closed, Action.close);
 
         assertThat(buildTriggered.isSignaled(), is(true));
     }
